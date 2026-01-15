@@ -10,10 +10,55 @@ from langchain_core.prompts import PromptTemplate
 # 1. Load secret key
 load_dotenv()
 
-# 2. UI Configuration
-st.set_page_config(page_title="CDF Onboarding Bot", page_icon="🤝")
-st.markdown("<h1 style='color: #007BFF;'>🤝 CDF Volunteer Onboarding Bot</h1>", unsafe_allow_html=True)
-st.write("Welcome! I'm here to help new volunteers navigate the **Community of Developers (CDF)**.")
+# 2. UI Configuration & Custom Styling
+st.set_page_config(page_title="Community Dreams Foundation Bot", page_icon="🤝", layout="wide")
+
+# Custom CSS for a professional, versatile app look
+st.markdown("""
+    <style>
+    .stApp {
+        background-color: #ffffff;
+    }
+    .main-header {
+        font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+        color: #007BFF;
+        font-weight: 700;
+        margin-bottom: 0px;
+        line-height: 1.1;
+    }
+    .sub-header {
+        color: #28a745;
+        font-weight: 600;
+        margin-top: 5px;
+        margin-bottom: 15px;
+    }
+    section[data-testid="stSidebar"] {
+        background-color: #f8f9fa;
+        border-right: 1px solid #eee;
+    }
+    hr {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+        border: 0;
+        border-top: 2px solid #eee;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# Header Section - Generalized Salutation
+header_container = st.container()
+with header_container:
+    col_text, col_logo = st.columns([3, 1], vertical_alignment="center")
+    
+    with col_text:
+        st.markdown('<h1 class="main-header">Welcome to Community Dreams Foundation</h1>', unsafe_allow_html=True)
+        st.markdown('<h2 class="sub-header">How can I assist you today?</h2>', unsafe_allow_html=True)
+        st.write("I am your dedicated resource for navigating the **CDF** ecosystem. Ask me anything about our programs, documentation, or initiatives.")
+    
+    with col_logo:
+        st.image("cdf-logo-with-text.png", use_container_width=True)
+
+st.divider()
 
 # 3. Setup OpenAI
 api_key = os.getenv("OPENAI_API_KEY")
@@ -32,13 +77,13 @@ FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeb1vE7-hXGgtqwI2mrabMB_Ok
 if os.path.exists("faiss_index"):
     vector_db = FAISS.load_local("faiss_index", embeddings, allow_dangerous_deserialization=True)
     
-    # 4a. Updated Prompt Template for Partial Answers & Guardrails
+    # Updated Prompt Template - Generalized for all users
     template = """You are a CDF Document Expert. Use the provided context to answer the user's question accurately.
 
     - If the user's question has multiple parts, answer every part you can find in the context.
-    - If you find some information but not all (e.g., you find registration steps but not core values), provide the information you found and then add: 
+    - If you find some information but not all, provide what you found and then add: 
       "Note: I couldn't find information regarding [the missing part] in our documents. For that specific inquiry, please fill out our Support Form."
-    - If the entire question is UNRELATED to CDF (personal questions, jokes, or general trivia), politely state that you only assist with CDF documentation and do NOT provide the form link.
+    - If the question is UNRELATED to CDF, politely state that you only assist with CDF-related information and do NOT provide the form link.
     - If the question IS about CDF but you find NOTHING at all, use this specific fallback: 
       "I'm sorry, I couldn't find that information in our current documentation. Please fill out our Support Form and someone from our team will respond to you via email."
 
@@ -52,7 +97,6 @@ Helpful Answer:"""
         template=template,
     )
 
-    # 5. Build the Chain
     qa_chain = RetrievalQA.from_chain_type(
         llm=llm,
         chain_type="stuff",
@@ -69,44 +113,47 @@ else:
 
 # 6. Interface & Sidebar
 with st.sidebar:
-    st.header("Settings")
-    if st.button("🗑️ Clear Chat"):
+    st.title("Settings")
+    if st.button("🗑️ Clear Chat History", use_container_width=True):
         st.session_state.messages = []
         st.rerun()
-    st.info("Tip: If you have multiple questions, I can answer them all at once if they are in the docs!")
+    
+    st.markdown("---")
+    st.markdown("### 💡 Resource Links")
+    st.info("Ask about programs, technical documentation, or contact information.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# Display chat messages
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
         if "Support Form" in message["content"] and message["role"] == "assistant":
             st.link_button("📋 Open Support Form", FORM_LINK)
 
-if prompt := st.chat_input("Ask about CDF volunteering..."):
+# Chat Input
+if prompt := st.chat_input("Ask a question about Community Dreams Foundation..."):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        with st.spinner("Searching CDF guides..."):
+        with st.spinner("Searching CDF records..."):
             result = qa_chain.invoke({"query": prompt})
             response = result["result"]
             sources = result["source_documents"]
 
             st.markdown(response)
             
-            # Show button if the AI mentioned the Support Form (either full fallback or partial)
             if "Support Form" in response:
-                st.link_button("📋 Open Support Form", FORM_LINK)
+                st.link_button("📋 Open Support Form", FORM_LINK, type="primary")
 
-            # Show sources if any were used to generate the answer
             if sources and "only assist with CDF" not in response:
-                with st.expander("📚 View Sources"):
+                with st.expander("📚 View Reference Sources"):
                     for doc in sources:
                         source_name = os.path.basename(doc.metadata.get('source', 'Unknown'))
                         page_num = doc.metadata.get('page', 0) + 1
-                        st.write(f"- **File:** {source_name} (Page {page_num})")
+                        st.write(f"- **Document:** {source_name} (Page {page_num})")
 
             st.session_state.messages.append({"role": "assistant", "content": response})
