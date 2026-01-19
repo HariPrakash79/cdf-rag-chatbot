@@ -68,7 +68,6 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, streaming=True)
 FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeb1vE7-hXGgtqwI2mrabMB_OkFcOazp7W6oM3RaGgCegJW1w/viewform?usp=dialog"
 
 if vector_db:
-    # IMPROVED TEMPLATE: Differentiates between "Missing CDF info" and "Out of Scope"
     template = """You are the official Community Dreams Foundation (CDF) Assistant. 
     Use the provided context to answer the question. 
 
@@ -77,9 +76,9 @@ if vector_db:
     - If the user asks about the location, refer to Sebring, Florida.
     
     GUARDRAILS:
-    1. If the question is UNRELATED to CDF, non-profits, or the foundation's projects (e.g., pizza, sports, general math), 
+    1. If the question is UNRELATED to CDF, non-profits, or the foundation's projects (e.g., pizza, sports), 
        politely state: "I am a specialized assistant for Community Dreams Foundation. I can only assist with CDF-related inquiries."
-       DO NOT mention the Support Form for unrelated questions.
+       DO NOT mention the Support Form for these unrelated questions.
     
     2. If the question IS about CDF but you cannot find the specific answer in the context, 
        say: "I'm sorry, I couldn't find that specific detail in our records. Please fill out our Support Form for more help."
@@ -110,7 +109,6 @@ with st.sidebar:
     st.title("Settings")
     if st.button("🗑️ Clear Chat History", use_container_width=True):
         st.session_state.messages = []
-        # Randomize suggestion on clear
         st.session_state.suggestion_idx = random.randint(0, 5)
         st.rerun()
     st.markdown("---")
@@ -119,7 +117,6 @@ with st.sidebar:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Suggestions for the dynamic placeholder
 suggestions = [
     "Who is the CEO?",
     "What is the office address?",
@@ -139,20 +136,16 @@ for message in st.session_state.messages:
         if "Support Form" in message["content"] and message["role"] == "assistant":
             st.link_button("📋 Open Support Form", FORM_LINK)
 
-# 8. Chat Input with Dynamic Placeholder and Bug Fix
+# 8. Chat Input with Dynamic Placeholder and Focus Fix
 current_placeholder = f"Ask about CDF (e.g., {suggestions[st.session_state.suggestion_idx]})"
 
-if prompt := st.chat_input(current_placeholder):
-    # 1. Add user message to state
+# The unique key="chat_input" helps Streamlit track this widget across reruns
+if prompt := st.chat_input(current_placeholder, key="chat_input"):
     st.session_state.messages.append({"role": "user", "content": prompt})
-    
-    # 2. Increment suggestion index BEFORE the response starts
     st.session_state.suggestion_idx = (st.session_state.suggestion_idx + 1) % len(suggestions)
-    
-    # 3. FIX: Immediate rerun ensures the UI registers the input correctly
     st.rerun()
 
-# 9. Response Logic (Triggered after the rerun when prompt is in session_state)
+# 9. Response Logic
 if st.session_state.messages and st.session_state.messages[-1]["role"] == "user":
     user_prompt = st.session_state.messages[-1]["content"]
     
@@ -178,5 +171,4 @@ if st.session_state.messages and st.session_state.messages[-1]["role"] == "user"
                             page_num = doc.metadata.get('page', 0) + 1
                             st.write(f"- **PDF:** {source_name} (Page {page_num})")
 
-            # Save assistant response to state
             st.session_state.messages.append({"role": "assistant", "content": response})
