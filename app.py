@@ -52,7 +52,6 @@ with header_container:
         st.markdown('<h2 class="sub-header">How can I assist you today?</h2>', unsafe_allow_html=True)
         st.write("I am your dedicated resource for navigating the **CDF** ecosystem.")
     with col_logo:
-        # Compatibility fix for Streamlit width parameters
         if os.path.exists("cdf-logo-with-text.png"):
             st.image("cdf-logo-with-text.png", width=250)
 
@@ -69,7 +68,7 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, streaming=True)
 FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeb1vE7-hXGgtqwI2mrabMB_OkFcOazp7W6oM3RaGgCegJW1w/viewform?usp=dialog"
 
 if vector_db:
-    # UPDATED TEMPLATE: Handles leadership, location, and strict out-of-scope guardrails
+    # UPDATED TEMPLATE: Explicitly handles leadership, location, and strict out-of-scope guardrails
     template = """You are the official Community Dreams Foundation (CDF) Assistant. 
     Use the provided context to answer the question. 
 
@@ -78,7 +77,7 @@ if vector_db:
     - If the user asks about the location, refer to Sebring, Florida.
     
     GUARDRAILS:
-    1. If the question is UNRELATED to CDF, non-profits, or the foundation's specific projects (e.g., pizza, sports, general math), 
+    1. If the question is UNRELATED to CDF, non-profits, or the foundation's specific projects (e.g., pizza, sports), 
        politely state: "I am a specialized assistant for Community Dreams Foundation. I can only assist with CDF-related inquiries."
        DO NOT mention the Support Form for these unrelated questions.
     
@@ -111,6 +110,7 @@ with st.sidebar:
     st.title("Settings")
     if st.button("🗑️ Clear Chat History", use_container_width=True):
         st.session_state.messages = []
+        # Randomly pick a new starting suggestion when clearing
         st.session_state.suggestion_idx = random.randint(0, 5)
         st.rerun()
     st.markdown("---")
@@ -119,7 +119,7 @@ with st.sidebar:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Logic for Rotating Suggestions
+# Suggestions for the dynamic placeholder
 suggestions = [
     "Who is the CEO?",
     "What is the office address?",
@@ -158,6 +158,7 @@ if prompt := st.chat_input(current_placeholder):
 
             st.markdown(response)
             
+            # Show button only for genuine CDF-related knowledge gaps
             if "Support Form" in response:
                 st.link_button("📋 Open Support Form", FORM_LINK, type="primary")
 
