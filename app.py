@@ -27,10 +27,8 @@ st.markdown("""
 @st.cache_resource
 def load_resources():
     """Load the heavy models and index once and keep them in memory."""
-    # Load Embeddings
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     
-    # Load FAISS Index
     if os.path.exists("faiss_index"):
         vector_db = FAISS.load_local(
             "faiss_index", 
@@ -42,7 +40,6 @@ def load_resources():
         
     return vector_db, embeddings
 
-# Initialize resources
 vector_db, embeddings = load_resources()
 
 # 4. Header Section
@@ -54,29 +51,32 @@ with header_container:
         st.markdown('<h2 class="sub-header">How can I assist you today?</h2>', unsafe_allow_html=True)
         st.write("I am your dedicated resource for navigating the **CDF** ecosystem.")
     with col_logo:
-        st.image("cdf-logo-with-text.png", use_container_width=True)
+        # Check if logo exists before loading to prevent crash
+        if os.path.exists("cdf-logo-with-text.png"):
+            st.image("cdf-logo-with-text.png", use_container_width=True)
 
 st.divider()
 
 # 5. Setup OpenAI
 api_key = os.getenv("OPENAI_API_KEY")
 if not api_key:
-    st.error("Missing OPENAI_API_KEY in your .env file!")
+    st.error("Missing OPENAI_API_KEY! Please set it in Streamlit Secrets or your .env file.")
     st.stop()
 
-# LLM stays consistent with streaming enabled
 llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, streaming=True)
 
-# Constant for the form link
 FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeb1vE7-hXGgtqwI2mrabMB_OkFcOazp7W6oM3RaGgCegJW1w/viewform?usp=dialog"
 
 if vector_db:
-    template = """You are a CDF Document Expert. Use the provided context to answer the user's question accurately.
+    # UPDATED TEMPLATE: More flexible and handles leadership/location better
+    template = """You are the official Community Dreams Foundation (CDF) Assistant. 
+    Use the provided context to answer the question. 
 
-    - If you find some information but not all, flag the missing parts for the Support Form.
-    - If the question is UNRELATED to CDF, politely state that you only assist with CDF-related information.
-    - If the question IS about CDF but you find NOTHING, use the fallback: 
-      "I'm sorry, I couldn't find that information. Please fill out our Support Form."
+    - You are an expert on CDF's mission, leadership (Dion Richardson), and operations.
+    - If the user asks about the CEO, President, or Founder, refer to Dion Richardson.
+    - If the user asks about the location, refer to Sebring, Florida.
+    - If the question is completely unrelated to non-profits, energy, or CDF, politely explain your focus.
+    - If you cannot find the answer in the context, say: "I'm sorry, I couldn't find that specific detail. Please fill out our Support Form for more help."
 
 Context: {context}
 
@@ -106,26 +106,23 @@ with st.sidebar:
         st.session_state.messages = []
         st.rerun()
     st.markdown("---")
-    st.info("Performance: Caching is active. Resources stay warm in memory.")
+    st.info("Performance: Caching is active.")
 
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat history
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-        if "Support Form" in message["content"] and message["role"] == "assistant":
-            st.link_button("📋 Open Support Form", FORM_LINK)
 
 # 7. Chat Input
-if prompt := st.chat_input("Ask a question about Community Dreams Foundation..."):
+if prompt := st.chat_input("Ask about CDF (e.g., Who is the CEO?)"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
     with st.chat_message("assistant"):
-        with st.spinner("Searching CDF records..."):
+        with st.spinner("Consulting CDF Knowledge Base..."):
             result = qa_chain.invoke({"query": prompt})
             response = result["result"]
             sources = result["source_documents"]
@@ -135,11 +132,16 @@ if prompt := st.chat_input("Ask a question about Community Dreams Foundation..."
             if "Support Form" in response:
                 st.link_button("📋 Open Support Form", FORM_LINK, type="primary")
 
-            if sources and "only assist with CDF" not in response:
+            if sources:
                 with st.expander("📚 View Reference Sources"):
                     for doc in sources:
-                        source_name = os.path.basename(doc.metadata.get('source', 'Unknown'))
-                        page_num = doc.metadata.get('page', 0) + 1
-                        st.write(f"- **Document:** {source_name} (Page {page_num})")
+                        # Improved source naming for URLs and PDFs
+                        raw_source = doc.metadata.get('source', 'Unknown')
+                        if raw_source.startswith('http'):
+                            st.write(f"- **Web:** [{raw_source}]({raw_source})")
+                        else:
+                            source_name = os.path.basename(raw_source)
+                            page_num = doc.metadata.get('page', 0) + 1
+                            st.write(f"- **PDF:** {source_name} (Page {page_num})")
 
             st.session_state.messages.append({"role": "assistant", "content": response})
