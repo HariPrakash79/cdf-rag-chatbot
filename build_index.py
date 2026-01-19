@@ -1,5 +1,5 @@
 import os
-from langchain_community.document_loaders import PyPDFLoader, WebBaseLoader
+from langchain_community.document_loaders import PyPDFLoader, SeleniumURLLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.vectorstores import FAISS
@@ -7,27 +7,27 @@ from langchain_community.vectorstores import FAISS
 # Config
 DATA_PATH = "data/"
 INDEX_PATH = "faiss_index"
-# Official CDF URLs to scrape
 WEB_URLS = [
     "https://cdreams.org/",
-    "https://cdreams.org/team" # Scrapes CEO and leadership info
+    "https://cdreams.org/team",
+    "https://cdreams.org/contact" # Added contact page specifically
 ]
 
 def build():
     documents = []
 
-    # 1. Load data from the CDF Website
-    print(f"🌐 Scraping: {WEB_URLS}")
+    # 1. Deep Scrape the Website (Handles JavaScript & Footers)
+    print(f"🌐 Deep Scraping with Selenium: {WEB_URLS}")
     try:
-        web_loader = WebBaseLoader(WEB_URLS)
+        # Selenium acts like a real browser to find the hidden footer info
+        web_loader = SeleniumURLLoader(urls=WEB_URLS)
         documents.extend(web_loader.load())
     except Exception as e:
-        print(f"⚠️ Web scraping failed (check your internet): {e}")
+        print(f"⚠️ Web scraping failed: {e}")
 
     # 2. Load all PDFs from data/ folder
     if not os.path.exists(DATA_PATH):
         os.makedirs(DATA_PATH)
-        print(f"📁 Created '{DATA_PATH}' folder. Put your PDFs here!")
     
     for file in os.listdir(DATA_PATH):
         if file.endswith(".pdf"):
@@ -36,22 +36,25 @@ def build():
             documents.extend(loader.load())
 
     if not documents:
-        print("❌ No documents found to index. Add PDFs or check the URLs.")
+        print("❌ No documents found. Add PDFs or check the URLs.")
         return
 
-    # 3. Split text into manageable chunks
-    # We use a slightly smaller overlap to keep web text concise
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=100)
+    # 3. Split text into larger chunks
+    # Increased size to 2000 so address and company stay in the same chunk
+    text_splitter = RecursiveCharacterTextSplitter(
+        chunk_size=2000, 
+        chunk_overlap=250
+    )
     chunks = text_splitter.split_documents(documents)
 
     # 4. Create searchable embeddings
-    print("🔗 Creating embeddings (this may take a minute)...")
+    print("🔗 Creating embeddings...")
     embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
     
     # 5. Save to local FAISS index
     vector_db = FAISS.from_documents(chunks, embeddings)
     vector_db.save_local(INDEX_PATH)
-    print(f"✅ Success! Search index (Web + PDF) saved to '{INDEX_PATH}'")
+    print(f"✅ Success! Deep-indexed data saved to '{INDEX_PATH}'")
 
 if __name__ == "__main__":
     build()
