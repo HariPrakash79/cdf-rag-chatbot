@@ -1,5 +1,6 @@
 import streamlit as st
 import os
+import random
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_huggingface import HuggingFaceEmbeddings
@@ -51,8 +52,9 @@ with header_container:
         st.markdown('<h2 class="sub-header">How can I assist you today?</h2>', unsafe_allow_html=True)
         st.write("I am your dedicated resource for navigating the **CDF** ecosystem.")
     with col_logo:
+        # Compatibility fix for Streamlit width parameters
         if os.path.exists("cdf-logo-with-text.png"):
-            st.image("cdf-logo-with-text.png", width='stretch')
+            st.image("cdf-logo-with-text.png", width=250)
 
 st.divider()
 
@@ -67,7 +69,7 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, streaming=True)
 FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeb1vE7-hXGgtqwI2mrabMB_OkFcOazp7W6oM3RaGgCegJW1w/viewform?usp=dialog"
 
 if vector_db:
-    # IMPROVED TEMPLATE: Differentiates between "Missing CDF info" and "Out of Scope"
+    # UPDATED TEMPLATE: Handles leadership, location, and strict out-of-scope guardrails
     template = """You are the official Community Dreams Foundation (CDF) Assistant. 
     Use the provided context to answer the question. 
 
@@ -76,9 +78,9 @@ if vector_db:
     - If the user asks about the location, refer to Sebring, Florida.
     
     GUARDRAILS:
-    1. If the question is UNRELATED to CDF, non-profits, or the foundation's projects (e.g., pizza, sports, general math), 
+    1. If the question is UNRELATED to CDF, non-profits, or the foundation's specific projects (e.g., pizza, sports, general math), 
        politely state: "I am a specialized assistant for Community Dreams Foundation. I can only assist with CDF-related inquiries."
-       DO NOT mention the Support Form for unrelated questions.
+       DO NOT mention the Support Form for these unrelated questions.
     
     2. If the question IS about CDF but you cannot find the specific answer in the context, 
        say: "I'm sorry, I couldn't find that specific detail in our records. Please fill out our Support Form for more help."
@@ -107,8 +109,9 @@ else:
 # 6. Interface & Sidebar
 with st.sidebar:
     st.title("Settings")
-    if st.button("🗑️ Clear Chat History", width='stretch'):
+    if st.button("🗑️ Clear Chat History", use_container_width=True):
         st.session_state.messages = []
+        st.session_state.suggestion_idx = random.randint(0, 5)
         st.rerun()
     st.markdown("---")
     st.info("Performance: Caching is active.")
@@ -116,15 +119,33 @@ with st.sidebar:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# Logic for Rotating Suggestions
+suggestions = [
+    "Who is the CEO?",
+    "What is the office address?",
+    "Tell me about the Transformation Window.",
+    "How can I contact the CDF office?",
+    "What are some open projects?",
+    "What is the mission of CDF?"
+]
+
+if "suggestion_idx" not in st.session_state:
+    st.session_state.suggestion_idx = 0
+
+# 7. Display Chat History
 for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
-        # Keep the button visible in history if the message contains the trigger phrase
         if "Support Form" in message["content"] and message["role"] == "assistant":
             st.link_button("📋 Open Support Form", FORM_LINK)
 
-# 7. Chat Input
-if prompt := st.chat_input("Ask about CDF (e.g., Who is the CEO?)"):
+# 8. Chat Input with Dynamic Placeholder
+current_placeholder = f"Ask about CDF (e.g., {suggestions[st.session_state.suggestion_idx]})"
+
+if prompt := st.chat_input(current_placeholder):
+    # Rotate suggestion for the next turn
+    st.session_state.suggestion_idx = (st.session_state.suggestion_idx + 1) % len(suggestions)
+    
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
@@ -137,7 +158,6 @@ if prompt := st.chat_input("Ask about CDF (e.g., Who is the CEO?)"):
 
             st.markdown(response)
             
-            # Button only appears if the AI explicitly suggests the Support Form
             if "Support Form" in response:
                 st.link_button("📋 Open Support Form", FORM_LINK, type="primary")
 
