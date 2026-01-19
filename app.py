@@ -68,6 +68,7 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, streaming=True)
 FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeb1vE7-hXGgtqwI2mrabMB_OkFcOazp7W6oM3RaGgCegJW1w/viewform?usp=dialog"
 
 if vector_db:
+    # UPDATED TEMPLATE: Optimized for mission and leadership retrieval
     template = """You are the official Community Dreams Foundation (CDF) Assistant. 
     Use the provided context to answer the question. 
 
@@ -76,9 +77,9 @@ if vector_db:
     - If the user asks about the location, refer to Sebring, Florida.
     
     GUARDRAILS:
-    1. If the question is UNRELATED to CDF, non-profits, or the foundation's projects (e.g., pizza, sports), 
+    1. If the question is UNRELATED to CDF, non-profits, or projects (e.g., pizza, general math), 
        politely state: "I am a specialized assistant for Community Dreams Foundation. I can only assist with CDF-related inquiries."
-       DO NOT mention the Support Form for these unrelated questions.
+       DO NOT mention the Support Form for these questions.
     
     2. If the question IS about CDF but you cannot find the specific answer in the context, 
        say: "I'm sorry, I couldn't find that specific detail in our records. Please fill out our Support Form for more help."
@@ -95,7 +96,8 @@ Helpful Answer:"""
         chain_type="stuff",
         retriever=vector_db.as_retriever(
             search_type="mmr", 
-            search_kwargs={"k": 8, "fetch_k": 30}
+            # Increased k to 10 for better mission-statement retrieval
+            search_kwargs={"k": 10, "fetch_k": 40} 
         ),
         return_source_documents=True,
         chain_type_kwargs={"prompt": QA_CHAIN_PROMPT}
@@ -117,13 +119,14 @@ with st.sidebar:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
+# Refined Suggestions: Uses full organization name for better vector matching
 suggestions = [
-    "Who is the CEO?",
-    "What is the office address?",
-    "Tell me about the Transformation Window.",
-    "How can I contact the CDF office?",
-    "What are some open projects?",
-    "What is the mission of CDF?"
+    "Who is Dion Richardson?",
+    "Where is the CDF office located?",
+    "Tell me about the Community Dreams Foundation mission.",
+    "How do I contact Dion Richardson?",
+    "What is the address in Sebring, Florida?",
+    "What does CDF do?"
 ]
 
 if "suggestion_idx" not in st.session_state:
@@ -136,10 +139,9 @@ for message in st.session_state.messages:
         if "Support Form" in message["content"] and message["role"] == "assistant":
             st.link_button("📋 Open Support Form", FORM_LINK)
 
-# 8. Chat Input with Dynamic Placeholder and Focus Fix
+# 8. Chat Input with Focus and Suggestion Rotation Fix
 current_placeholder = f"Ask about CDF (e.g., {suggestions[st.session_state.suggestion_idx]})"
 
-# The unique key="chat_input" helps Streamlit track this widget across reruns
 if prompt := st.chat_input(current_placeholder, key="chat_input"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.session_state.suggestion_idx = (st.session_state.suggestion_idx + 1) % len(suggestions)
