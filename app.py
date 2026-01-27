@@ -68,7 +68,7 @@ llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, streaming=True)
 FORM_LINK = "https://docs.google.com/forms/d/e/1FAIpQLSeb1vE7-hXGgtqwI2mrabMB_OkFcOazp7W6oM3RaGgCegJW1w/viewform?usp=dialog"
 
 if vector_db:
-    # UPDATED TEMPLATE: Optimized for mission and leadership retrieval
+    # UPDATED TEMPLATE: Handles mixed queries (Valid + Invalid) intelligently
     template = """You are the official Community Dreams Foundation (CDF) Assistant. 
     Use the provided context to answer the question. 
 
@@ -76,18 +76,26 @@ if vector_db:
     - If the user asks about the CEO, President, or Founder, refer to Dion Richardson.
     - If the user asks about the location, refer to Sebring, Florida.
     
-    GUARDRAILS:
-    1. If the question is UNRELATED to CDF, non-profits, or projects (e.g., pizza, general math), 
-       politely state: "I am a specialized assistant for Community Dreams Foundation. I can only assist with CDF-related inquiries."
-       DO NOT mention the Support Form for these questions.
+    GUIDELINES FOR ANSWERING:
     
-    2. If the question IS about CDF but you cannot find the specific answer in the context, 
-       say: "I'm sorry, I couldn't find that specific detail in our records. Please fill out our Support Form for more help."
+    1. **Compound Questions (IMPORTANT)**: 
+       If a user asks a question with two parts (e.g., "What is CDF and how to make pizza?"):
+       - **FIRST:** Answer the CDF-related part clearly using the context.
+       - **SECOND:** Politey decline the unrelated part. 
+       - *Example Answer:* "The Community Dreams Foundation is a non-profit dedicated to [Mission]. However, I cannot assist with pizza recipes as I am specialized for CDF inquiries."
 
-Context: {context}
+    2. **Strictly Unrelated**: 
+       If the ENTIRE question is unrelated (e.g., "How to fix a car"), refuse it:
+       "I am a specialized assistant for Community Dreams Foundation. I can only assist with CDF-related inquiries."
+    
+    3. **Missing Info**: 
+       If the question is about CDF but the answer is not in the context, say:
+       "I'm sorry, I couldn't find that specific detail in our records. Please fill out our Support Form for more help."
 
-Question: {question}
-Helpful Answer:"""
+    Context: {context}
+
+    Question: {question}
+    Helpful Answer:"""
     
     QA_CHAIN_PROMPT = PromptTemplate(input_variables=["context", "question"], template=template)
 
@@ -142,6 +150,7 @@ for message in st.session_state.messages:
 # 8. Chat Input with Focus and Suggestion Rotation Fix
 current_placeholder = f"Ask about CDF (e.g., {suggestions[st.session_state.suggestion_idx]})"
 
+# The key="chat_input" ensures the browser keeps focus in this box after st.rerun()
 if prompt := st.chat_input(current_placeholder, key="chat_input"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     st.session_state.suggestion_idx = (st.session_state.suggestion_idx + 1) % len(suggestions)
