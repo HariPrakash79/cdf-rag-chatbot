@@ -1,0 +1,320 @@
+[
+  {
+    "question": "What is CDF Portal?",
+    "expected_answer": "CDF Portal is an advanced platform created by the Community Dreams Foundation (CDF) to provide career growth opportunities, real-world project experience, and professional tools. It combines hands-on learning, collaboration, and AI-driven resources to empower the team and partners.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "What is the subscription fee?",
+    "expected_answer": "The subscription fee is $15 per month. This fee supports CDF Portal's platform and tools like the Portfolio Builder and compliance tracking, while funding professional growth resources.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "What types of projects will I work on?",
+    "expected_answer": "You'll work on both internal CDF projects and collaborative initiatives with external partners. These projects span a variety of professional domains, giving you diverse real-world experience and opportunities to build your portfolio.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "How do I join CDF?",
+    "expected_answer": "Start by visiting the CDF portal on the cdreamstream.org website and submitting your volunteer application. Once the team reviews your application, you'll receive an offer letter and agreement. After you sign and return the agreement, you'll be invited to the Slack channel.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "Does CDF provide a signed copy of the offer letter?",
+    "expected_answer": "Yes. CDF provides a separate signed copy in return when requested by the university.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "I need to change my start date on my offer letter or haven't received my EAD yet. What should I do?",
+    "expected_answer": "Please contact humanresources@cdreams.org for any offer letter-related questions. The HR team will work with you on any changes you need.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "I'm unable to join the Slack workspace because it's asking for a cdreams.org email. Will I receive a CDF Outlook or email address?",
+    "expected_answer": "No, you won't receive a cdreams.org email or Outlook account. You'll use your personal email to access Slack, and all CDF communications will happen through your personal email on Slack. Do not use a .edu email.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "How can an employer request employment or background verification for a CDF member?",
+    "expected_answer": "For employment or background verification inquiries, have the employer contact CDF at verification@cdreams.org or call +1(407)259-4242.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "Can CDF help with I-9 forms, verifying weekly hours, or employment details for SEVP/OPT?",
+    "expected_answer": "Yes. For any compliance documents, timesheets, or employment verification needs, email humanresources@cdreams.org directly, and the team will assist promptly.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "What name and details should I enter for SEVP or similar forms?",
+    "expected_answer": "Use the following: Organization Name: Community Dreams Foundation. Supervisor Name & Email: Dion Richardson, dion@cdreams.org.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "I'm planning to leave CDF. What is the offboarding process?",
+    "expected_answer": "To resign, log into the CDF portal and submit a resignation request. CDF asks for a one-week notice period. Your last working day will be the last day of your notice period, and honoring the notice period ensures you receive your relieving letter promptly.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "Are waivers available?",
+    "expected_answer": "Yes. CDF offers several waiver options: Referral Waiver, Leadership Waiver, Sweat Equity Waiver, and Hardship Waiver.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "How do I apply for a Leadership Waiver?",
+    "expected_answer": "To be eligible for a Leadership Waiver, you need to take on a leadership role at CDF such as Project Manager. Reach out to the Lead Executive Project Manager on Slack to discuss this opportunity.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "How do I apply for a Sweat Equity Waiver?",
+    "expected_answer": "You can apply for a Sweat Equity Waiver if you're already part of a project. Discuss it with your reporting manager, who can help raise a request outlining your contributions. If not yet on a project, join one by checking the project postings.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "How do I apply for a Referral Waiver?",
+    "expected_answer": "The referral waiver is applied when someone uses your referral link (available on the CDF portal) to join CDF. They should enter your name in the referrer section of the registration form. You can track your referral count from the portal.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "How do I apply for a Hardship Waiver?",
+    "expected_answer": "CDF suggests exploring alternatives first: a Leadership Waiver (lifetime) by taking a leadership role, or a Sweat Equity Waiver (lifetime) through project contributions. If neither fits, email cdffellowship@cdreams.org with a letter explaining your hardship and any supporting documentation. Approval is at CDF's discretion and the duration may be limited.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "How do I cancel my recurring membership payment on PayPal?",
+    "expected_answer": "You can cancel your automatic payment by following the steps on PayPal's official help page: https://www.paypal.com/us/cshelp/article/what-is-an-automatic-payment-and-how-do-i-update-or-cancel-one-help240",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "How can I get a refund on my monthly membership?",
+    "expected_answer": "Join the #payment_queries channel on Slack and share your reason for the refund request. Once approved, CDF will ask for your transaction details and process the refund.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "I accidentally made two membership payments this month. What should I do?",
+    "expected_answer": "The extra payment will automatically apply to your membership for next month, so no action is needed. If you prefer a refund instead, send a screenshot or receipt of both transactions.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "I paid using someone else's card or email. How can I ensure my account is credited?",
+    "expected_answer": "Send proof of payment (receipt or screenshot) to cdffellowship@cdreams.org along with your registered email address, and CDF will make sure the payment is applied correctly to your account.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "Why am I being charged $20 instead of the $15 monthly fee?",
+    "expected_answer": "If you pay after the 5th of the month, a $5 late fee is added making it $20 total. You can avoid this by paying for three months at once, which waives the late fees and gives an additional $5 discount.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "Will I be refunded if I paid for multiple months but leave before they're all used?",
+    "expected_answer": "Yes. Provide a screenshot or receipt of the transaction, the transaction date, and your departure date in the #payment_queries channel on Slack, and CDF will process your refund promptly.",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "FAQ"
+  },
+  {
+    "question": "What are the steps to log into the EPM Admin Dashboard?",
+    "expected_answer": "Navigate to the CDF login page, enter your registered email and password, click Sign In, and you will be taken directly to your EPM Admin Dashboard.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What sections are visible on the EPM Admin Dashboard after logging in?",
+    "expected_answer": "The dashboard shows: My Projects (all projects assigned to you), Total Tasks (aggregated tasks across all managed projects), Completed Tasks (completion metrics and percentages), Hours This Week (total logged hours for the current week), and Quick Actions (shortcuts to commonly used tools).",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What are the three project status types in the EPM portal?",
+    "expected_answer": "Active (project is currently in progress), Completed (project has been fully delivered), and On Hold (work is paused temporarily).",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "How do I view the details of a specific project in the EPM dashboard?",
+    "expected_answer": "Click any project card in the My Projects section, then navigate to the Projects tab for complete information.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What information is shown in the Tasks tab for an EPM Admin?",
+    "expected_answer": "The Tasks tab shows the full list of tasks across your projects, task details such as title, assigned volunteer, logged hours, and status, and filtered task views for easier tracking.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What does the Hours This Week card show on the EPM dashboard?",
+    "expected_answer": "It displays the total hours logged by all team members assigned to your projects, as well as week-over-week productivity trends.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What Quick Actions are available to an EPM Admin?",
+    "expected_answer": "Quick Actions include: View Tasks (access full task list), View Projects (open your project portfolio), View Team (view team member information), and Export Data (download reports for analysis).",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What is the formula for Task Completion Rate in the EPM dashboard?",
+    "expected_answer": "Task Completion Rate = (Completed Tasks / Total Tasks) \u00d7 100. It tracks overall progress and updates in real-time as tasks are completed.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "When does the Weekly Hours metric reset in the EPM dashboard?",
+    "expected_answer": "The Weekly Hours metric resets every Monday and reflects time spent across all active projects.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What tabs are available in the EPM Admin sidebar?",
+    "expected_answer": "The sidebar includes: Dashboard (overview of projects, tasks, and productivity metrics), Tasks (centralized location for managing all tasks), Projects (full portfolio of projects), and Notifications (project updates, task changes, and team alerts).",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What types of notifications does the EPM Admin receive?",
+    "expected_answer": "The Notifications tab provides real-time updates on task status changes, project updates, team assignments and activity, and system announcements. Categories include Task Updates, Project Updates, and Team Activity.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What are the steps to change your password as an EPM Admin?",
+    "expected_answer": "Go to your Profile, select Change Password, enter your current password, enter your new password twice, then click Update Password.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What are the best practices recommended for EPM Admins?",
+    "expected_answer": "Check your dashboard daily, monitor task completion rates to identify delays, keep project details accurate for reliable reporting, respond promptly to notifications, use Quick Actions to streamline your workflow, and track weekly logged hours to ensure balanced workloads.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "How does an EPM Admin log out of the portal?",
+    "expected_answer": "Click Logout at the bottom of the sidebar, confirm the action, and you will be redirected to the Login page.",
+    "source_file": "EPM_Admin_User_Guide.pdf",
+    "department": "EPM"
+  },
+  {
+    "question": "What documents and information do I need before registering as a CDF volunteer?",
+    "expected_answer": "You need: a valid email address (note: .edu emails are not accepted), phone number, signed Offer Letter, signed Agreement, Resume/CV, Date of Birth, and emergency contact information.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What are the steps to register as a CDF volunteer?",
+    "expected_answer": "Go to the Registration Page, fill in your name, email, and create a password, add phone number and date of birth, enter your address, set weekly availability (5\u201340 hours), select volunteer duration (1\u201324 months), provide university information, tell how you heard about CDF, upload your resume (PDF/doc/docx), review and accept the waiver agreement, agree to terms and conditions, double-check all information, tick the confirmation checkbox, and click Submit Application.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What is the onboarding checklist after being approved as a CDF volunteer?",
+    "expected_answer": "The onboarding checklist includes: documents approved, join the Slack workspace, update your Slack profile (name, title, phone, photo), and complete your profile by adding Date of Birth and emergency contact.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What tabs are available in the Volunteer Dashboard sidebar?",
+    "expected_answer": "The sidebar includes: Overview, Tasks, Membership, Documents, Projects, Community Forum, Support Tickets, and Notifications.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What does the Referral Progress section show on the volunteer dashboard?",
+    "expected_answer": "It shows your active membership type (e.g., Lifetime membership waiver), referral stats (approved, pending, total referrals), and a button to copy your personal referral link to share with others.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What Quick Actions are available to volunteers on the dashboard?",
+    "expected_answer": "Quick Actions include: Sync Tasks (automatically syncs assigned tasks from Taskverse), View Tasks (view all synced volunteer activities and track progress), UpSkill Hub (access learning materials and training resources), and Community (connect with fellow volunteers and collaborate on projects).",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What can I do in the Tasks tab as a volunteer?",
+    "expected_answer": "You can view all assigned tasks from ongoing projects, track total hours worked, see task deadlines and detailed descriptions, monitor each task's completion status, and click Sync Tasks to update your list from Taskverse.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What can I manage in the Membership tab?",
+    "expected_answer": "You can view your current membership status, check payment history and subscription details, manage or renew your membership plan, access the referral program dashboard, generate your unique referral link, and track your referrals, approvals, and rewards.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What can I do in the Documents tab of the volunteer portal?",
+    "expected_answer": "You can view all submitted documents in one place, download signed Volunteer Agreements and Offer Letters, check the approval status of your documents, and upload additional documents if requested by the HR team. You'll receive email notifications when a document is approved or requires resubmission.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What categories are available in the Community Forum?",
+    "expected_answer": "The Community Forum has four categories: General Discussions (everyday conversations and announcements), Projects (collaborate and share updates about project work), Help & Support (ask for assistance or guidance), and Ideas & Feedback (suggest improvements or new initiatives).",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "How do I create a support ticket as a volunteer?",
+    "expected_answer": "Click Create Ticket, select the priority level (Low, Medium, High, or Urgent), describe your issue clearly, and click Submit. You can track ticket status (Open, In Progress, Resolved, Closed) and respond to admin replies directly.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What are the three options for getting help as a CDF volunteer?",
+    "expected_answer": "Option 1: Community Forum \u2014 ask questions in the Help & Support category. Option 2: Support Tickets \u2014 create a ticket for technical issues that HR/IT admins will respond to. Option 3: Check your Reporting Manager \u2014 view their info on your profile and contact them for guidance.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What notification categories are available in the volunteer portal?",
+    "expected_answer": "Notification categories include System, Task, Payment, and Document. The bell icon shows the unread count and you can click to view all notifications, mark them as read, or navigate to related content.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "How can I update my profile as a volunteer?",
+    "expected_answer": "Click your avatar in the sidebar to access your profile. You can edit contact information, change your password, update your profile picture, and modify preferences.",
+    "source_file": "Volunteer_User_Guide.pdf",
+    "department": "VOLUNTEER"
+  },
+  {
+    "question": "What is the CEO's name at CDF?",
+    "expected_answer": "NOT_IN_DOCS",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "HALLUCINATION_TRAP"
+  },
+  {
+    "question": "What is the office address of CDF headquarters?",
+    "expected_answer": "NOT_IN_DOCS",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "HALLUCINATION_TRAP"
+  },
+  {
+    "question": "Does CDF offer health insurance to volunteers?",
+    "expected_answer": "NOT_IN_DOCS",
+    "source_file": "Frequently_Asked_Questions.pdf",
+    "department": "HALLUCINATION_TRAP"
+  }
+]

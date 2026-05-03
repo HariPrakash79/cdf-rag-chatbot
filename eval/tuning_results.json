@@ -1,0 +1,30 @@
+[
+  {
+    "config": {
+      "chunk_size": 1500,
+      "chunk_overlap": 100,
+      "k": 4,
+      "fetch_k": 15,
+      "label": "chunk=1500_k=4"
+    },
+    "avg_accuracy": 0.811,
+    "avg_grounding": 0.902,
+    "avg_latency": 1.634,
+    "citation_accuracy": 0.528,
+    "total_questions": 53
+  },
+  {
+    "config": {
+      "chunk_size": 1500,
+      "chunk_overlap": 100,
+      "k": 12,
+      "fetch_k": 40,
+      "label": "chunk=1500_k=12"
+    },
+    "avg_accuracy": 0.892,
+    "avg_grounding": 0.962,
+    "avg_latency": 1.535,
+    "citation_accuracy": 0.528,
+    "total_questions": 53
+  }
+]

@@ -1,10 +1,10 @@
-echo "streamlit
+streamlit
 langchain
 langchain-community
 langchain-openai
 langchain-huggingface
-langchain-classic
 faiss-cpu
 pypdf
+pdfplumber
 python-dotenv
-sentence-transformers" > requirements.txt
+sentence-transformers
