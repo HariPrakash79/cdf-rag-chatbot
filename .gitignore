@@ -3,3 +3,5 @@ faiss_index/
 __pycache__/
 venv/
 .streamlit/secrets.toml
+*.pyc
+eval/tuning_results.json
