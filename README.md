@@ -40,11 +40,11 @@ data/
 ├── faq_general.pdf
 ├── volunteer_onboarding_guide.pdf
 ├── epm_admin_guide.pdf
-├── hr_policies.pdf
+├── hr_faq.pdf
 └── finance_faq.pdf
 ```
 
-The prefix before the first underscore becomes the department tag automatically (e.g. `hr_policies.pdf` → `HR`).
+The prefix before the first underscore becomes the department tag automatically (e.g. `hr_faq.pdf` → `HR`).
 
 ### 4. Build the Knowledge Base
 
@@ -72,7 +72,7 @@ CDF-CHATBOT/
 ├── .venv/               # Virtual environment (do not commit)
 ├── data/                # Place all department PDFs here
 ├── eval/                # Evaluation scripts and question set
-│   ├── eval_set.json        # 53-question evaluation set
+│   ├── eval_set.json        # 82-question evaluation set
 │   ├── generate_eval_set.py # Synthetic Q&A generation from PDFs
 │   ├── parse_faq.py         # Extracts real Q&A pairs from FAQ PDF
 │   └── run_tuning.py        # Retrieval config comparison + scoring
@@ -111,6 +111,9 @@ Graceful handling for: empty queries, OpenAI outages, rate limits, expired API k
 **Admin Re-indexing UI**
 Sidebar → 🔒 Admin → enter password → upload PDFs → click Upload & Rebuild Index. New documents go live immediately without restarting the app.
 
+**Open Access**
+The chatbot is accessible to all CDF volunteers and staff without login. The admin panel is separately password-protected.
+
 ---
 
 ## Current Document Coverage
@@ -118,6 +121,7 @@ Sidebar → 🔒 Admin → enter password → upload PDFs → click Upload & Reb
 | Department | File | Coverage |
 |---|---|---|
 | FAQ | faq_general.pdf | Membership fees, waivers, payments, offboarding, verification |
+| HR | hr_faq.pdf | Onboarding, documents, tickets, letters, resignation, SEVP, W-2 |
 | Volunteer | volunteer_onboarding_guide.pdf | Registration, onboarding, dashboard, tasks, membership |
 | EPM | epm_admin_guide.pdf | Project monitoring, task tracking, team hours, metrics |
 
@@ -140,7 +144,7 @@ Current production settings (tuned in Week 2):
 
 ## Evaluation Results
 
-Scores from the 53-question eval set (22 real FAQ pairs + 14 EPM synthetic + 14 Volunteer synthetic + 3 hallucination traps):
+Scores from the 82-question eval set (22 real FAQ pairs + 29 real HR pairs + 14 EPM synthetic + 14 Volunteer synthetic + 3 hallucination traps):
 
 | Metric | Week 1 Baseline | Week 2 (current) |
 |---|---|---|
@@ -150,7 +154,7 @@ Scores from the 53-question eval set (22 real FAQ pairs + 14 EPM synthetic + 14 
 | I Don't Know Triggers | 100.0% | 100.0% |
 | Avg Latency | 1.59s | 1.53s |
 
-> Citation accuracy will improve significantly once department-wise PDFs are added and metadata filtering is validated.
+> Citation accuracy will improve as more department-wise PDFs are added and metadata filtering is validated across all departments.
 
 ---
 
@@ -180,9 +184,8 @@ Results are saved to `eval/BASELINE.md` and `eval/tuning_results.json`.
 ## Known Limitations
 
 - PDFs must have selectable text. Scanned or image-only PDFs will not be indexed.
-- Admin UI uploads are temporary on Streamlit Cloud — container restarts wipe the `data/` folder. Migration to cloud storage (S3 / Google Drive) is planned.
-- Google OAuth authentication is pending CDF admin providing Google Cloud credentials.
-- Citation accuracy is currently limited by the absence of department-specific PDFs.
+- Admin UI uploads are temporary on Streamlit Cloud — container restarts wipe the `data/` folder. Migration to cloud storage (S3 / Google Drive) is planned for a future sprint.
+- Citation accuracy is currently limited by the number of department-specific PDFs available.
 
 ---
 
@@ -192,6 +195,7 @@ Results are saved to `eval/BASELINE.md` and `eval/tuning_results.json`.
 - Never commit `.env`, `.venv/`, or `faiss_index/` to the repository
 - To upgrade the LLM: update the model name in `app.py` (e.g. `gpt-4o`)
 - `ADMIN_PASSWORD` must be set in `.env` for the admin panel to work
+- New department PDFs are auto-detected — no code changes needed after adding files
 
 ---
 
@@ -199,4 +203,4 @@ Results are saved to `eval/BASELINE.md` and `eval/tuning_results.json`.
 
 Engineering & AI Department — file requests via the CDF Support Google Form linked within the chatbot interface.
 
-**Repository:** https://github.com/anbunambi3108/cdf-rag-chatbot
+**Repository:** https://github.com/Community-Dreams-Foundation/rag-chatbot
