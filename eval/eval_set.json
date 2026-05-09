@@ -316,5 +316,179 @@
     "expected_answer": "NOT_IN_DOCS",
     "source_file": "Frequently_Asked_Questions.pdf",
     "department": "HALLUCINATION_TRAP"
+  },
+  {
+    "question": "I completed registration but cannot log in. What should I do?",
+    "expected_answer": "Reach out to the HR email for login issues after registration.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "How long does the onboarding process usually take?",
+    "expected_answer": "The onboarding process typically takes 2\u20135 business days, depending on timely document submission, verification, and internal approvals.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "What documents are required during onboarding?",
+    "expected_answer": "Volunteers must have their EAD card available at the time of registration. Do not register using an expected or future EAD date. Date-change requests under such circumstances will not be accommodated.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "My documents are still under review. How long does verification take?",
+    "expected_answer": "Document verification generally takes 2\u20135 business days after submission.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "How do I request a waiver?",
+    "expected_answer": "Waivers are processed from the CDF portal. Submit your request via the Membership tab.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "I did not receive the payment link. What should I do?",
+    "expected_answer": "Payment links are not sent via email. Please use the CDF Portal \u2192 Membership tab to track all payment-related information.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "I missed a payment for a previous period. How can this be addressed?",
+    "expected_answer": "Your dues and balances will be reflected in the CDF Portal \u2192 Membership tab.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "I see a discrepancy in my payment. What should I do?",
+    "expected_answer": "Please raise a Payment Support ticket with a brief explanation of the discrepancy and any supporting details for validation.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "Can I request multiple things in one ticket?",
+    "expected_answer": "No. Please raise separate tickets for separate requests. This helps ensure faster and more accurate resolution.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "How do I request resignation from my volunteer role?",
+    "expected_answer": "Please raise a Resignation ticket through the portal. Preponed resignation dates will not be accommodated. Volunteers must plan registration and resignation timelines to serve the required notice period.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "Will I automatically receive a relieving letter after resignation?",
+    "expected_answer": "No. The relieving letter must be requested separately after resignation.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "How do I request an experience letter?",
+    "expected_answer": "An experience letter requires a separate request in the portal and is not generated automatically. Go to Support Tickets \u2192 HR Letters \u2192 Letter Type \u2192 Experience Letter.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "How long does HR usually take to respond to emails or tickets?",
+    "expected_answer": "The standard response time is 1\u20133 business days, depending on the request type and current volume.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "Can dates, hours, or roles be changed once registered?",
+    "expected_answer": "No. Dates, hours, and roles cannot be changed once registration is completed.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "How do I join the Slack channel?",
+    "expected_answer": "Slack access is shared via the portal after onboarding is completed. If you have completed onboarding and are still unable to join Slack, please email the HR team.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "What happens if I submit incomplete documents?",
+    "expected_answer": "Incomplete document submissions will pause the onboarding process. Onboarding will resume only after all required documents have been submitted and verified.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "Can I request an urgent or backdated experience or relieving letter?",
+    "expected_answer": "No. Urgent or backdated letter requests are not generally supported and may result in delays due to additional verification and validation requirements.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "What happens if I miss the latest communications due to inactivity?",
+    "expected_answer": "All official updates are shared via the portal and Slack general channel. Missed communications due to inactivity may result in termination of your volunteer role.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "What happens if I send multiple follow-ups before receiving a response?",
+    "expected_answer": "Please avoid multiple follow-ups within a short timeframe. Repeated follow-ups may delay response times. Wait for the standard response window.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "Can I contact HR via personal messages or direct emails instead of raising a ticket?",
+    "expected_answer": "No. Requests sent outside the official ticketing system are not tracked or processed. All requests must be submitted through the designated portal.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "What details do I need for the SEVP portal?",
+    "expected_answer": "All necessary details required for filling the SEVP employee form are available on your offer letter. Please refer to the offer letter for details.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "How soon will a volunteer receive the relieving letter?",
+    "expected_answer": "The relieving letter will be sent 24 to 48 hours after approval by the HR team on the resignation ticket.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "Does CDF issue W-2 forms?",
+    "expected_answer": "No. Community Dreams Foundation operates as a volunteer-based organization and does not issue W-2 forms. They are unable to provide W-2 documentation for STEM OPT verification purposes.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "How long does it take to receive a new Slack invite link?",
+    "expected_answer": "Please allow 3\u20134 business days for a new Slack invite link to be generated. It will be sent directly to your email.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "What happens if a volunteer requests an experience letter but has not worked on any projects?",
+    "expected_answer": "CDF provides general letters with responsibilities related to their role, removing the team name from the document.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "For RFE, can volunteers request supervisor information and volunteer confirmation?",
+    "expected_answer": "CDF provides a volunteer confirmation letter including supervisor email details only. Phone numbers of supervisors are not provided.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "Can a resigned volunteer get access to Slack?",
+    "expected_answer": "No. CDF does not provide Slack access to resigned volunteers.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "Can a volunteer ask for Slack access or supervisor details for RFE?",
+    "expected_answer": "CDF can draft a document stating that Slack access cannot be provided, and include supervisor details in the employee confirmation document. Note: confirm with Nikhil or Mahitha before sending.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
+  },
+  {
+    "question": "What if an active volunteer requests an experience letter?",
+    "expected_answer": "HR needs to confirm with the volunteer whether they are resigning or continuing before processing the experience letter.",
+    "source_file": "hr_faq.pdf",
+    "department": "HR"
   }
 ]
